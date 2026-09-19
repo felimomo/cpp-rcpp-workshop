@@ -1,0 +1,18 @@
+# env/environment.yml
+name: insurefit
+channels: [conda-forge]
+dependencies:
+  - r-base=4.4
+  - compilers
+  - make
+  - pkg-config
+  - git
+  - libblas=*=*openblas
+  - r-rcpp
+  - r-rcpparmadillo
+  - r-devtools
+  - r-usethis
+  - r-testthat
+  - r-bench
+  - r-shiny
+  - r-ggplot2
