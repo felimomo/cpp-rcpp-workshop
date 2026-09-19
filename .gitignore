@@ -1,0 +1,34 @@
+build/
+
+# --- Compiled C++ artifacts (the big one) ---
+src/*.o
+src/*.so
+src/*.dll
+src/*.dylib
+src/RcppExports.o
+
+# --- R ---
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+*.Rcheck/
+*.tar.gz
+.Renviron
+
+# --- renv, if you use it ---
+renv/library/
+renv/staging/
+
+# --- Conda / env ---
+# (env/ itself is tracked — it holds environment.yml and scripts)
+*.conda-meta/
+
+# --- Editor / OS ---
+.vscode/
+.idea/
+.DS_Store
+
+# --- Scratch ---
+*.log
+data/
