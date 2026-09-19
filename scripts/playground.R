@@ -4,7 +4,7 @@
 # Armadillo <-> Rcpp <-> R integration
 # Will just pile on quick tests one after the other.
 
-Rcpp::sourceCpp("../src/armadillo_basics.cpp")
+Rcpp::sourceCpp(here::here("src", "armadillo_basics.cpp"))
 
 # n_row, n_col
 Mat <- matrix(
