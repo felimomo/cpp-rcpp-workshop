@@ -1,4 +1,10 @@
+// [[Rcpp::depends(RcppArmadillo)]]
+// 
+//  -> so that sourceCpp in R knows where to find the 
+//     header 
+
 #include <RcppArmadillo.h>
+
 
 Rcpp::IntegerVector row_col_n(const arma::mat& X) {
   return Rcpp::IntegerVector::create(
