@@ -13,6 +13,6 @@ dependencies:
   - r-devtools
   - r-usethis
   - r-testthat
-  - r-bench
+  - r-microbenchmark # r-bench not on conda forge
   - r-shiny
   - r-ggplot2
