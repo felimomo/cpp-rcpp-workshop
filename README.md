@@ -17,10 +17,20 @@ calculations in C++ as a backend called from R.
 
 ## Reproduce
 
+### Setup
+
 Spin up the environment with [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html):
 
 ```
 chmod +x env/create-env.sh
 ./env/create-env.sh
 conda activate insurefit && source env/env-vars.sh 
+```
+
+### Run
+
+Up to now, only implemented a basic playground testing the R<>Cpp boundary (calling C++ functions with Armadillo and Rcpp types from an R script).
+Run the R script yourself once the setup is done:
+```
+Rscript scripts/playground.R
 ```
