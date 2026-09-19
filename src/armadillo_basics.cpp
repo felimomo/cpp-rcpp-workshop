@@ -17,9 +17,13 @@ Rcpp::IntegerVector row_col_n(const arma::mat& X) {
 }
 
 // [[Rcpp::export]]
-Rcpp::BoolVector cumsum_lt_thresh(
+Rcpp::LogicalVector cumsum_lt_thresh(
 	const arma::vec& v, 
 	const double thresh
 ){
-	return cumsum(v) <= thresh;
+	arma::uvec thr_flags = cumsum(v) <= thresh;
+	return Rcpp::LogicalVector(
+		thr_flags.begin(),
+		thr_flags.end()
+	);
 }
