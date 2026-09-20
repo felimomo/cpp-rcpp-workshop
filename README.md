@@ -52,3 +52,9 @@ a general linear model:
 ```
 Rscript scripts/glm-fit.R
 ```
+
+Run grid benchmarks for a general linear model fit 
+and generate csv data:
+```
+Rscript scripts/run-glm-benchs.R
+```
