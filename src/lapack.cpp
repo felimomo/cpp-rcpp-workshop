@@ -19,8 +19,8 @@ Rcpp::NumericVector solve_lapack(
 {
   // calls dgesv to solve Ax = b
   int n = A.nrow(); // A is n x n
-  nrhs = 1;         // b and x are n x nrhs
-  info = 0;
+  int nrhs = 1;         // b and x are n x nrhs
+  int info = 0;
 
   // copies needed: dgesv A & b in-place when doing LU
   //                (recall, A & b are R matrices which
