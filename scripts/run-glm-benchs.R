@@ -36,7 +36,7 @@ run_one <- function(n_obs, n_pred, data_sd = 1.0, n_eval = 100) {
 }
 
 grid <- expand.grid(n_obs  = c(1000, 2000, 3000),
-                    n_pred = c(200, 500, 800, 1500, 1800, 2500))
+                    n_pred = c(200, 500, 800, 1500, 1800, 2500, 2800))
 grid <- subset(grid, n_pred < n_obs)          # need n > p
 
 results <- purrr::pmap_dfr(grid, run_one)
