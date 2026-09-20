@@ -30,8 +30,13 @@ Rscript scripts/install-cran-extras.R
 
 ### Run
 
-Up to now, only implemented a basic playground testing the R<>Cpp boundary (calling C++ functions with Armadillo and Rcpp types from an R script).
+Basic playground testing the R<>Cpp boundary (calling C++ functions with Armadillo and Rcpp types from an R script).
 Run the R script yourself once the setup is done:
 ```
 Rscript scripts/playground.R
+```
+
+Benchmarking runtime and memory usage for functions on Armadillo matrices:
+```
+Rscript scripts/arma_benchmark.R
 ```

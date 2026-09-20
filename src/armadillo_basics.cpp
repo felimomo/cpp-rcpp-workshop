@@ -62,12 +62,16 @@ double rowwise_sum(arma::mat& M){
 	return total;
 }
 
+// Memory allocation within C++ not visible to R
+// on the outer API call. What will be visible
+// is the time it takes to make the copy.
+
 // [[Rcpp::export]]
 void shallow(arma::mat& M){
 	arma::mat& X = M; // shallow copy
 }
 
-// [[Rcpp:export]]
+// [[Rcpp::export]]
 void deep(arma::mat& M){
 	arma::mat X = M; // deep copy
 }
