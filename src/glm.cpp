@@ -36,7 +36,7 @@ public:
 		));
 	}
 
-	void fit(){
+	void lse_fit(){
 		XtY = X_.t() * y_
 		XtX = X_.t() * X_
 
