@@ -61,3 +61,14 @@ double rowwise_sum(arma::mat& M){
 	}
 	return total;
 }
+
+// [[Rcpp::export]]
+void shallow(arma::mat& M){
+	arma::mat& X = M; // shallow copy
+}
+
+// [[Rcpp:export]]
+void deep(arma::mat& M){
+	arma::mat X = M; // deep copy
+}
+
