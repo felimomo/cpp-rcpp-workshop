@@ -51,6 +51,29 @@ bench::mark(
 	                  # with different results
 )
 
-# singular matrix 1: projector
-A <- matrix(1, nrow=size, ncol=size)
-print(sum(solve_lapack(A,b)))
+# singular matrix 1: projector 
+# --> commented out to not crash
+# A <- matrix(1, nrow=size, ncol=size)
+# print(sum(solve_lapack(A,b)))
+
+size <- 1000
+batch_n <- 10
+batch_size <- 100
+X <- matrix(rnorm(size ** 2), nrow=size, ncol=size)
+A <- crossprod(X)
+A[lower.tri(A)] <- 0 
+
+B64  <- matrix(rnorm(p * 64),  nrow = p)
+B256 <- matrix(rnorm(p * 256), nrow = p)
+
+s <- new(CholSolver, A) 
+bench::mark(
+	factorize_only = new(CholSolver, A),
+  solve_64       = s$solve_batch(B64),
+  solve_256      = s$solve_batch(B256),
+  full_solve_256 = { 
+  	s2 <- new(CholSolver, A); s2$solve_batch(B256) 
+  },
+  check = FALSE
+)
+
