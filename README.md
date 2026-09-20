@@ -1,19 +1,19 @@
-# Some GLM model fits on C++
+# C++ Rcpp workshop
 
-In this repo I'll workshop my skills in C++ and the C++/R boundary (Rcpp) by fitting a GLM 
-to insurance claim data from the French Motor TPL dataset: 
+In this repo I'll workshop my skills in C++ and the C++/R boundary (Rcpp), and specifically on how to use
+the LAPACK ABI. I'll do performance benchmarks that show where runtime and memory savings can be relevant.
 
-https://www.kaggle.com/datasets/karansarpal/fremtpl2-french-motor-tpl-insurance-claims
-
-I previously ran some model fit experiments in Python (statsmodels/pymer4) for this dataset 
-over at:
-
-https://github.com/felimomo/fremtpl2-insurance-claims-prediction/tree/main
-
-The point here is to reimplement a basic model fitting algorithm using the C++ linear algebra ecosystem
-(Armadillo + calling functionalities from LAPACK, OpenBLAS).
 As a personal project, I'm using it to better understand the "lay of the land" for statistical and numerical
 calculations in C++ as a backend called from R.
+The toolset I'm using is: Armadillo, LAPACK ABI, Rcpp.
+
+A second stage of the project would involve writing some basic statistical inference algorithms "from scratch"
+using the low-level functionalities provided by LAPACK. A good test dataset for this is the
+[French Motors TPL insurance claim dataset](https://www.kaggle.com/datasets/karansarpal/fremtpl2-french-motor-tpl-insurance-claims).
+
+I previously worked on inference for this dataset over at:
+
+https://github.com/felimomo/fremtpl2-insurance-claims-prediction/tree/main
 
 ## Reproduce
 
