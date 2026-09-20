@@ -63,8 +63,9 @@ X <- matrix(rnorm(size ** 2), nrow=size, ncol=size)
 A <- crossprod(X)
 A[lower.tri(A)] <- 0 
 
-B64  <- matrix(rnorm(p * 64),  nrow = p)
-B256 <- matrix(rnorm(p * 256), nrow = p)
+p <- nrow(A)
+B64  <- matrix(rnorm(p * 64),  nrow = p, ncol = 64)
+B256 <- matrix(rnorm(p * 256), nrow = p, ncol = 256)
 
 s <- new(CholSolver, A) 
 bench::mark(

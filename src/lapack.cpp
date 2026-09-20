@@ -75,48 +75,32 @@ Rcpp::NumericVector solve_lapack(
 //           triangular solution for each chunk of b
 
 
+// NOTE: as opposed to dgesv_, RcppArmadillo.h does
+//       already declare dpotrf_ and dpotrs_ so no 
+//       need to redeclare them here.
+
 // cholesky factorization of matrix a
-extern "C" {
-  void dpotrf_(
-    const char* uplo, 
-    const int* n, 
-    double* a, 
-    const int* lda,
-    int* info);
-}
+// extern "C" {
+//   void dpotrf_(
+//     const char* uplo, 
+//     const int* n, 
+//     double* a, 
+//     const int* lda,
+//     int* info);
+// }
 
 // solves system Ax = b for a cholesky-factorized A
-extern "C" {
-  void dpotrs_(
-    const char* uplo, 
-    const int* n, 
-    const int* nrhs, 
-    double* a, 
-    const int* lda,
-    double* b, 
-    const int* ldb, 
-    int* info);
-}
-
-// take the discussion above to the extreme:
-// batch size = 1
-// [[Rcpp::export]]
-Rcpp::NumericVector solve_lapack_batch(
-  Rcpp::NumericMatrix A_SymUp, // upper triang of 
-  Rcpp::NumericMatrix b)       // symmetric matrix
-{
-  Rcpp::NumericMatrix Acopy = Rcpp::clone(A_SymUp);
-  Rcpp::NumericVector bcopy = Rcpp::clone(b);
-  
-  int n = A.nrow();
-  char uplo = 'U';
-  int info = 0;
-
-  dpotrf_(&uplo, &n, Acopy.begin(), &n, &info);
-
-
-
-}
+// extern "C" {
+//   void dpotrs_(
+//     const char* uplo, 
+//     const int* n, 
+//     const int* nrhs, 
+//     double* a, 
+//     const int* lda,
+//     double* b, 
+//     const int* ldb, 
+//     int* info);
+// }
 
 
 // Archit.: A CholSolver that has a cholesky factor
@@ -141,14 +125,17 @@ public:
     n_ = A_upper.nrow();
     uplo_ = 'U'; // attribute
     int info = 0;
-    int n = n_
-    int uplo = uplo
+    int n = n_;
+    char uplo = uplo_;
 
     // cholesky factor overwritten in R_
-    dpotrf_(
+    arma::dpotrf_(
       &uplo, &n, 
       const_cast<double*>(L_.memptr()), // lapack arg
-      &n, &info);
+      &n, &info,
+      1 // length of uplo char. specific to arma
+        // declaration (not part of orig. lapack)
+    );
 
     if (info > 0){
       Rcpp::stop(
@@ -166,19 +153,20 @@ public:
     // solves equations AX=B for a batch of columns B
     
     arma::mat Barma = Rcpp::as<arma::mat>(B);
-    nrhs = B.ncol()
-    int info = 0
-    int n = n_
-    int uplo = uplo_
+    int nrhs = B.ncol();
+    int info = 0;
+    int n = n_;
+    char uplo = uplo_;
 
     // LAPACK call. Solves in-place in Barma.
-    dpotrs_(
+    arma::dpotrs_(
       &uplo, &n, &nrhs, 
       const_cast<double*>(L_.memptr()), 
       &n, 
       const_cast<double*>(Barma.memptr()), 
-      &n, &info
-    )
+      &n, &info,
+      1 // see discussion above in dpotrf_
+    );
     if (info < 0){
       Rcpp::stop(
         "dpotrs: illegal argument %d", -info);
