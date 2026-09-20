@@ -46,3 +46,9 @@ Calling and benchmarking a LAPACK algorithm
 ```
 Rscript scripts/lapack-calls.R
 ```
+
+Benchmarking C++/R methods to fit
+a general linear model:
+```
+Rscript scripts/glm-fit.R
+```
