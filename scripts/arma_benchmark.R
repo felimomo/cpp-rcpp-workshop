@@ -18,21 +18,11 @@ shallow_deep_res <- bench::mark(
 )
 print(shallow_deep_res)
 
-# memory allocation testing in C++ and R
-Rcpp::sourceCpp(here::here(
-	"MemoryTesting", 
-	"read_modify.cpp"
-))
+bench::mark(
+	cpp_copy = cpp_copy(M),
+	cpp_view = cpp_view(M)
+)
 
-measure <- function(f, M) { 
-	alloc_reset(); 
-	invisible(f(M)); 
-	alloc_mb() 
-}
-
-# let's test copying vs viewing on C++:
-print(measure(cpp_copy, M))
-print(measure(cpp_view, M))
 
 # a similar mechanism is observed in R, where
 # modifying a matrix autotriggers a deep copy

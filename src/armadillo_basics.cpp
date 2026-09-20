@@ -76,3 +76,33 @@ void deep(arma::mat& M){
 	arma::mat X = M; // deep copy
 }
 
+// Memory testing on two similar-looking 
+// Rcpp functions.
+
+// making an actual data copy
+// [[Rcpp::export]]
+double cpp_copy(
+  const Rcpp::NumericMatrix& Mr
+) {
+  arma::mat M = Rcpp::as<arma::mat>(Mr);   
+  return arma::accu(M);
+}
+
+// Making a view-only copy (view R's memory)
+//   => M.memptr() IS Mr.begin(). 
+// note: need copy_aux_mem = false below
+// [[Rcpp::export]]
+double cpp_view(
+  const Rcpp::NumericMatrix& Mr
+) {
+  const arma::mat M(const_cast<double*>(
+    Mr.begin()), 
+    Mr.nrow(), 
+    Mr.ncol(),
+    false,       // copy_aux_mem
+    true         // strict (pin version to R buffer: 
+);               // can't resize later in the function)
+
+  return arma::accu(M);
+}
+
