@@ -25,6 +25,7 @@ Spin up the environment with [conda](https://docs.conda.io/projects/conda/en/lat
 chmod +x env/create-env.sh
 ./env/create-env.sh
 conda activate insurefit && source env/env-vars.sh 
+Rscript scripts/install-cran-extras.R
 ```
 
 ### Run
