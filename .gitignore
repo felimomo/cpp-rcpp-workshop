@@ -1,6 +1,6 @@
 build/
 
-# --- Compiled C++ artifacts (the big one) ---
+# --- C++ ---
 src/*.o
 src/*.so
 src/*.dll
@@ -16,12 +16,11 @@ src/RcppExports.o
 *.tar.gz
 .Renviron
 
-# --- renv, if you use it ---
+# --- renv ---
 renv/library/
 renv/staging/
 
-# --- Conda / env ---
-# (env/ itself is tracked — it holds environment.yml and scripts)
+# --- Conda env ---
 *.conda-meta/
 
 # --- Editor / OS ---
