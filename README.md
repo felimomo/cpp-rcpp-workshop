@@ -40,3 +40,9 @@ Benchmarking runtime and memory usage for functions on Armadillo matrices:
 ```
 Rscript scripts/arma_benchmark.R
 ```
+
+Calling and benchmarking a LAPACK algorithm
+(solving a system of linear equations):
+```
+Rscript scripts/lapack-calls.R
+```
