@@ -1,3 +1,5 @@
+// [[Rcpp::depends(RcppArmadillo)]]
+
 #include <RcppArmadillo.h>
 // interface to call LAPACK's dgesv_ ABI
 extern "C" {
