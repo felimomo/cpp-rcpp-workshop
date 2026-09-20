@@ -123,6 +123,9 @@ Rcpp::NumericVector solve_lapack_batch(
 //          Cholesky is computed once, and attribute
 //          survives between method calls.
 
+// in R:
+//    s <- new(CholSolver, XtX_upper)
+//    X <- s$solve_batch(B)
 class CholSolver {
 public:
   CholSolver(
@@ -136,13 +139,18 @@ public:
     n_ = A_upper.nrow();
     uplo_ = 'U'; // attribute
     int info = 0;
+    int n = n_
+    int uplo = uplo
 
     // cholesky factor overwritten in R_
-    dpotrf_(&uplo_, &n, L_.memptr(), &n, &info);
+    dpotrf_(
+      &uplo, &n, 
+      const_cast<double*>(L_.memptr()), // lapack arg
+      &n, &info);
 
     if (info > 0){
       Rcpp::stop(
-        "Matrix is exactly singular (U[%d,%d] = 0)", 
+        "Matrix is not PSD (U[%d,%d] = 0)", 
         info, info
       );
     }
@@ -158,13 +166,16 @@ public:
     arma::mat Barma = Rcpp::as<arma::mat>(B);
     nrhs = B.ncol()
     int info = 0
+    int n = n_
+    int uplo = uplo_
 
     // LAPACK call. Solves in-place in Barma.
     dpotrs_(
-      &uplo_, &n_, &nrhs, 
-      L_.memptr(), &n_, 
-      Barma.memptr(), 
-      &n_, &info
+      &uplo, &n, &nrhs, 
+      const_cast<double*>(L_.memptr()), 
+      &n, 
+      const_cast<double*>(Barma.memptr()), 
+      &n, &info
     )
     if (info < 0){
       Rcpp::stop(
@@ -181,7 +192,6 @@ private:
 // boilerplate to expose the class to R
 RCPP_MODULE(chol_module) {
   Rcpp::class_<CholSolver>("CholSolver")
-    .constructor<arma::mat>()
-    .method("solve_batch", &CholSolver::solve_batch)
-    .method("dim",         &CholSolver::dim);
+    .constructor<Rcpp::NumericMatrix>()
+    .method("solve_batch", &CholSolver::solve_batch);
 }
