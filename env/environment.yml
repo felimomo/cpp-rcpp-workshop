@@ -11,6 +11,7 @@ dependencies:
   - r-rcpp
   - r-rcpparmadillo
   - r-devtools
+  - r-dplyr
   - r-here
   - r-usethis
   - r-testthat
