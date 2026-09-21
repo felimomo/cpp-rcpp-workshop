@@ -35,10 +35,10 @@ run_one <- function(n_obs, n_pred, data_sd = 1.0, n_eval = 100) {
   )
 }
 
-grid <- expand.grid(n_obs  = c(1000, 2000, 3000),
-                    n_pred = c(200, 500, 800, 1500, 1800, 2500, 2800))
+grid <- expand.grid(n_obs  = c(1000, 2000, 3000, 4000),
+                    n_pred = c(200, 500, 900, 1500, 1900, 2500, 2900, 3500, 3900))
 grid <- subset(grid, n_pred < n_obs)          # need n > p
-g
+
 results <- purrr::pmap_dfr(grid, run_one)
 print(results, n = Inf)
 write.csv(results, here::here("notes", "glm-benchmarks.csv"), row.names = FALSE)
