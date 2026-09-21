@@ -24,3 +24,18 @@ ggsave(
 	here::here("notes", "memory.png"), 
 	p, width = 8, height = 5, dpi = 150
 )
+
+p <- (
+	(
+		df |> filter(method != 'qr')
+		 	 |> ggplot(aes(x=n_pred, y=max_dev_qr, color=method))
+	)
+	+ geom_line()
+	+ facet_wrap(~n_obs, scales="free")
+	+ scale_y_log10()
+)
+
+ggsave(
+	here::here("notes", "max_dev.png"), 
+	p, width = 8, height = 5, dpi = 150
+)
