@@ -20,8 +20,14 @@ p <- (
 		)
 	+ xlab("N. Pred. Vars.")
 	+ ylab("Median Runtime (s)")
-	+ ggtitle("Per-method runtime scaling")
+	+ ggtitle("Linear Model Fit: Per-method runtime scaling")
 	+ theme(plot.title = element_text(hjust = 0.5))
+	+ scale_color_discrete(
+    labels = c(
+    	"qr" = "R QR-solver (LAPACK-based)", 
+    	"inv" = "Mat. Inv. (C++ Armadillo)", 
+    	"dgesv" = "Chol. Fact. (LAPACK dgesv)")
+  )
 )
 ggsave(
 	plot_loc("runtime.png"), 
@@ -40,7 +46,7 @@ p <- (
 	+ scale_y_log10()
 	+ xlab("N. Pred. Vars.")
 	+ ylab("R Memory use (MB)")
-	+ ggtitle("Memory usage on the R side")
+	+ ggtitle("Linear Model Fit: Memory usage on the R side")
 	+ theme(plot.title = element_text(hjust = 0.5))
 )
 ggsave(
@@ -63,7 +69,7 @@ p <- (
 	+ scale_y_log10()
 	+ xlab("N. Pred. Vars.")
 	+ ylab("Max dev. w.r. to QR")
-	+ ggtitle("Super-exponential error scaling")
+	+ ggtitle("Linear Model Fit: Error scaling")
 	+ theme(plot.title = element_text(hjust = 0.5))
 )
 ggsave(
