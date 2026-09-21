@@ -1,5 +1,11 @@
 # C++ Rcpp workshop
 
+## Summary
+
+Memory, runtime and accuracy benchmarks on a C++ backend called from R with Rcpp, with LAPACK ABI calls.
+
+## Motivation
+
 In this repo I'll workshop my skills in C++ and the C++/R boundary (Rcpp), and specifically on how to use
 the LAPACK ABI. I'll do performance benchmarks that show where runtime and memory savings can be relevant.
 
