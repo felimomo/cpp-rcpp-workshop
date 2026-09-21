@@ -15,6 +15,12 @@ I previously worked on inference for this dataset over at:
 
 https://github.com/felimomo/fremtpl2-insurance-claims-prediction/tree/main
 
+## GLM benchmarks
+
+The script `scripts/run-glm-bench.R` analyzes the runtime, memory usage and accuracy of different fitting algorithms for a general linear model.
+These results are stored in `notes/glm-benchmarks.csv` and plotted using `notes/bench-plots`.
+The plots can be found at [`plots/`](https://github.com/felimomo/cpp-rcpp-workshop/tree/main/plots).
+
 ## Reproduce
 
 ### Setup
