@@ -1,5 +1,5 @@
 # env/environment.yml
-name: insurefit
+name: workshop
 channels: [conda-forge]
 dependencies:
   - r-base=4.4
